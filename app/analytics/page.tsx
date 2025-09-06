@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server"
 import { Navigation } from "@/components/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { DeathChart } from "@/components/death-chart"
+import { ReloadButton } from "@/components/reload-button"
 
 export default async function AnalyticsPage() {
     const supabase = await createClient()
@@ -62,7 +63,10 @@ export default async function AnalyticsPage() {
 
             <div className="container mx-auto px-4 py-8">
                 <div className="mb-8">
-                    <h1 className="text-3xl font-bold text-foreground mb-2">Death Analytics</h1>
+                    <div className="flex">
+                        <h1 className="text-3xl font-bold text-foreground mb-2">Death Analytics</h1>
+                        <ReloadButton />
+                    </div>
                     <p className="text-muted-foreground">Analyze your Pokemon Soul Link performance and statistics.</p>
                 </div>
 

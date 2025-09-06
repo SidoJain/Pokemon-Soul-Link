@@ -4,6 +4,7 @@ import { Navigation } from "@/components/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { ReloadButton } from "@/components/reload-button"
 import Link from "next/link"
 
 export default async function DashboardPage() {
@@ -72,7 +73,10 @@ export default async function DashboardPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
                     <Card>
                         <CardHeader>
-                            <CardTitle>Recent Games</CardTitle>
+                            <div className="flex items-center justify-between">
+                                <CardTitle>Recent Games</CardTitle>
+                                <ReloadButton />
+                            </div>
                             <CardDescription>Your latest soul link adventures</CardDescription>
                         </CardHeader>
                         <CardContent>

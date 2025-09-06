@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server"
 import { Navigation } from "@/components/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { ReloadButton } from "@/components/reload-button"
 import Link from "next/link"
 
 export default async function GamesPage() {
@@ -31,7 +32,10 @@ export default async function GamesPage() {
             <div className="container mx-auto px-4 py-8">
                 <div className="flex items-center justify-between mb-8">
                     <div>
-                        <h1 className="text-3xl font-bold text-foreground mb-2">Your Games</h1>
+                        <div className="flex">
+                            <h1 className="text-3xl font-bold text-foreground mb-2">Your Games</h1>
+                            <ReloadButton />
+                        </div>
                         <p className="text-muted-foreground">Manage your soul link adventures</p>
                     </div>
                     <Button asChild>

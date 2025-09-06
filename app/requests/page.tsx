@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { LoadingSpinner } from "@/components/loading-spinner"
 import { useRouter } from "next/navigation"
+import { ReloadButton } from "@/components/reload-button"
 
 interface GameRequest {
     id: string
@@ -143,7 +144,10 @@ export default function RequestsPage() {
             <div className="container mx-auto px-4 py-8">
                 <div className="max-w-4xl mx-auto">
                     <div className="mb-8">
-                        <h1 className="text-3xl font-bold text-foreground mb-2">Game Requests</h1>
+                        <div className="flex">
+                            <h1 className="text-3xl font-bold text-foreground mb-2">Game Requests</h1>
+                            <ReloadButton />
+                        </div>
                         <p className="text-muted-foreground">Manage your incoming and outgoing game requests.</p>
                     </div>
 
