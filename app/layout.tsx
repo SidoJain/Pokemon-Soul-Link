@@ -13,6 +13,9 @@ export const metadata: Metadata = {
     icons: {
         icon: "./favicon.ico"
     },
+    alternates: {
+        canonical: "https://pokemon-soul-link.vercel.app/",
+    },
     robots: "index,follow"
 }
 
