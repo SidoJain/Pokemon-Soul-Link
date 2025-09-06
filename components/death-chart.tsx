@@ -16,18 +16,12 @@ export function DeathChart({ data }: DeathChartProps) {
     const totalUserDeaths = data.reduce((sum, game) => sum + game.userDeaths, 0)
     const totalOpponentDeaths = data.reduce((sum, game) => sum + game.opponentDeaths, 0)
 
-    const pieData = [
-        {
-            name: "Your Deaths",
-            value: totalUserDeaths,
-            color: "#dc2626",
-        },
-        {
-            name: "Opponent Deaths",
-            value: totalOpponentDeaths,
-            color: "#2563eb",
-        },
-    ]
+    const pieData = (totalUserDeaths === 0 && totalOpponentDeaths === 0) ? [
+        { name: "Total Deaths", value: 1, color: "" }
+    ] : [
+        { name: "Your Deaths", value: totalUserDeaths, color: "#dc2626" },
+        { name: "Opponent Deaths", value: totalOpponentDeaths, color: "#2563eb" }
+    ];
 
     return (
         <Card>

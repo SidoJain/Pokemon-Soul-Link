@@ -49,29 +49,6 @@ export default async function DashboardPage() {
                     </p>
                 </div>
 
-                {pendingRequestsCount > 0 && (
-                    <Card className="mb-6 border-primary/20 bg-primary/5">
-                        <CardContent className="pt-6">
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <h3 className="font-medium text-foreground">New Game Requests</h3>
-                                    <p className="text-sm text-muted-foreground">
-                                        You have {pendingRequestsCount} pending game request{pendingRequestsCount !== 1 ? "s" : ""}
-                                    </p>
-                                </div>
-                                <Button asChild size="sm" className="hover:bg-orange-500">
-                                    <Link href="/requests">
-                                        View Requests
-                                        <Badge variant="secondary" className="ml-2">
-                                            {pendingRequestsCount}
-                                        </Badge>
-                                    </Link>
-                                </Button>
-                            </div>
-                        </CardContent>
-                    </Card>
-                )}
-
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
                     <Card>
                         <CardHeader className="pb-3">
