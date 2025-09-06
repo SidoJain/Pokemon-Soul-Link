@@ -60,17 +60,10 @@ export function MobileNav({ username, onSignOut, isLoading }: MobileNavProps) {
                     >
                         Analytics
                     </Link>
-                    <Link
-                        href="/profile"
-                        className="text-foreground hover:text-primary transition-colors py-2"
-                        onClick={() => setOpen(false)}
-                    >
-                        Profile
-                    </Link>
                     <div className="border-t pt-4">
                         {username && (
                             <p className="text-sm text-muted-foreground mb-4">
-                                Signed in as <span className="font-medium text-foreground">{username}</span>
+                                Signed in as <Link href="/profile" className="text-foreground hover:text-primary transition-colors py-2">{username}</Link>
                             </p>
                         )}
                         <Button variant="outline" onClick={onSignOut} disabled={isLoading} className="w-full bg-transparent">

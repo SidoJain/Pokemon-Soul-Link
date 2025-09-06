@@ -48,15 +48,12 @@ export function Navigation({ username }: NavigationProps) {
                             <Link href="/analytics" className="text-foreground hover:text-primary transition-colors">
                                 Analytics
                             </Link>
-                            <Link href="/profile" className="text-foreground hover:text-primary transition-colors">
-                                Profile
-                            </Link>
                         </div>
                     </div>
                     <div className="flex items-center space-x-4">
                         {username && (
                             <span className="hidden sm:block text-sm text-muted-foreground">
-                                Welcome, <span className="font-medium text-foreground">{username}</span>
+                                Welcome, <Link href="/profile" className="text-foreground hover:text-primary transition-colors">{username}</Link>
                             </span>
                         )}
                         <ThemeToggle />
