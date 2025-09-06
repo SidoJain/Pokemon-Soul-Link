@@ -1,0 +1,134 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+	--background: oklch(0.98 0.01 180); /* Slightly tinted white */
+	--foreground: oklch(0.2 0.02 240); /* Deep navy blue */
+	--card: oklch(0.99 0.005 180); /* Very light tinted card */
+	--card-foreground: oklch(0.2 0.02 240); /* Deep navy blue */
+	--popover: oklch(0.99 0.005 180); /* Very light tinted popover */
+	--popover-foreground: oklch(0.2 0.02 240); /* Deep navy blue */
+	/* Made primary more vibrant cyan */
+	--primary: oklch(0.65 0.15 195); /* Vibrant cyan */
+	--primary-foreground: oklch(1 0 0); /* Pure white */
+	/* Made secondary more vibrant pink */
+	--secondary: oklch(0.769 0.188 70.08); /* Vibrant pink */
+	--secondary-foreground: oklch(1 0 0); /* Pure white */
+	--muted: oklch(0.96 0.01 180); /* Light tinted muted */
+	--muted-foreground: oklch(0.45 0.02 240); /* Medium navy */
+	/* Made accent more vibrant */
+	--accent: oklch(0.7 0.3 90); /* Vibrant orange */
+	--accent-foreground: oklch(1 0 0); /* Pure white */
+	/* Made destructive more vibrant red */
+	--destructive: oklch(0.6 0.25 15); /* Vibrant red */
+	--destructive-foreground: oklch(1 0 0); /* Pure white */
+	--border: oklch(0.9 0.01 180); /* Light tinted border */
+	--input: oklch(0.96 0.01 180); /* Light tinted input */
+	--ring: oklch(0.65 0.15 195 / 0.5); /* Vibrant cyan ring */
+	/* Updated chart colors for pie chart - blue for opponent, red for user */
+	--chart-1: oklch(0.55 0.18 240); /* Blue for opponent deaths */
+	--chart-2: oklch(0.6 0.25 15); /* Red for your deaths */
+	--radius: 0.5rem;
+	--sidebar: oklch(0.985 0 0); /* #f9fafb */
+	--sidebar-foreground: oklch(0.556 0 0); /* #4b5563 */
+	--sidebar-primary: oklch(0.646 0.118 184.704); /* #0891b2 */
+	--sidebar-primary-foreground: oklch(1 0 0); /* #ffffff */
+	--sidebar-accent: oklch(0.769 0.188 70.08); /* #ec4899 */
+	--sidebar-accent-foreground: oklch(1 0 0); /* #ffffff */
+	--sidebar-border: oklch(0.922 0 0); /* #e5e7eb */
+	--sidebar-ring: oklch(0.646 0.118 184.704 / 0.5); /* Primary with opacity */
+}
+
+.dark {
+	--background: oklch(0.08 0.01 240); /* Deep dark with slight blue tint */
+	--foreground: oklch(0.95 0.01 180); /* Light with slight cyan tint */
+	--card: oklch(0.12 0.01 240); /* Dark card with blue tint */
+	--card-foreground: oklch(0.95 0.01 180); /* Light card text */
+	--popover: oklch(0.08 0.01 240); /* Dark popover */
+	--popover-foreground: oklch(0.95 0.01 180); /* Light popover text */
+	/* Keep vibrant primary in dark mode */
+	--primary: oklch(0.7 0.18 195); /* Brighter cyan for dark mode */
+	--primary-foreground: oklch(0.08 0.01 240); /* Dark text on primary */
+	--secondary: oklch(0.25 0.01 240); /* Dark secondary */
+	--secondary-foreground: oklch(0.95 0.01 180); /* Light secondary text */
+	--muted: oklch(0.25 0.01 240); /* Dark muted */
+	--muted-foreground: oklch(0.7 0.01 180); /* Muted text */
+	/* Keep vibrant accent in dark mode */
+	--accent: oklch(0.7 0.3 90); /* Vibrant orange */
+	--accent-foreground: oklch(1 0 0); /* Light text on accent */
+	/* Keep vibrant destructive in dark mode */
+	--destructive: oklch(0.65 0.28 15); /* Brighter red for dark mode */
+	--destructive-foreground: oklch(1 0 0); /* White text on destructive */
+	--border: oklch(0.25 0.01 240); /* Dark border */
+	--input: oklch(0.25 0.01 240); /* Dark input */
+	--ring: oklch(0.7 0.18 195 / 0.5); /* Bright cyan ring */
+	/* Updated dark mode chart colors */
+	--chart-1: oklch(0.6 0.2 240); /* Brighter blue for opponent deaths */
+	--chart-2: oklch(0.65 0.28 15); /* Brighter red for your deaths */
+	--radius: 0.5rem;
+	--sidebar: oklch(0.205 0 0); /* Dark sidebar */
+	--sidebar-foreground: oklch(0.985 0 0); /* Light sidebar text */
+	--sidebar-primary: oklch(0.646 0.118 184.704); /* Cyan primary */
+	--sidebar-primary-foreground: oklch(1 0 0); /* White text */
+	--sidebar-accent: oklch(0.769 0.188 70.08); /* Pink accent */
+	--sidebar-accent-foreground: oklch(1 0 0); /* White text */
+	--sidebar-border: oklch(0.269 0 0); /* Dark border */
+	--sidebar-ring: oklch(0.646 0.118 184.704 / 0.5); /* Primary ring */
+}
+
+@theme inline {
+	--font-sans: var(--font-geist-sans);
+	--font-mono: var(--font-geist-mono);
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+	--color-popover: var(--popover);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-destructive: var(--destructive);
+	--color-destructive-foreground: var(--destructive-foreground);
+	--color-border: var(--border);
+	--color-input: var(--input);
+	--color-ring: var(--ring);
+	--color-chart-1: var(--chart-1);
+	--color-chart-2: var(--chart-2);
+	--radius-sm: calc(var(--radius) - 4px);
+	--radius-md: calc(var(--radius) - 2px);
+	--radius-lg: var(--radius);
+	--radius-xl: calc(var(--radius) + 4px);
+	--color-sidebar: var(--sidebar);
+	--color-sidebar-foreground: var(--sidebar-foreground);
+	--color-sidebar-primary: var(--sidebar-primary);
+	--color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+	--color-sidebar-accent: var(--sidebar-accent);
+	--color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+	--color-sidebar-border: var(--sidebar-border);
+	--color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+	html {
+		@apply bg-background text-foreground;
+	}
+	* {
+		@apply border-border outline-ring/50;
+	}
+	body {
+		@apply bg-background text-foreground;
+		transition: background-color 0.5s ease;
+	}
+
+	.theme-transitioning * {
+		transition: background-color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease, fill 0.5s ease, stroke 0.5s ease !important;
+	}
+}

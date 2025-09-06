@@ -1,0 +1,61 @@
+import { ThemeToggle } from "@/components/theme-toggle"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import Link from "next/link"
+
+export default function HomePage() {
+    return (
+        <div className="min-h-screen bg-background">
+            <div className="absolute top-4 right-4 z-10">
+                <ThemeToggle />
+            </div>
+
+            <div className="container mx-auto px-4 py-8 md:py-16">
+                <div className="text-center mb-12 md:mb-16">
+                    <h1 className="text-4xl md:text-6xl font-bold text-primary mb-4">Pokemon Soul Link</h1>
+                    <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                        Track your Pokemon Soul Link adventures with friends. Monitor deaths, analyze statistics, and see who&apos;s
+                        the better trainer.
+                    </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto mb-12 md:mb-16">
+                    <Card>
+                        <CardHeader>
+                            <CardTitle className="text-xl md:text-2xl text-primary">What is Soul Link?</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <CardDescription className="text-base leading-relaxed">
+                                Soul Link is a Pokemon challenge where two players link their Pokemon together. If one Pokemon faints,
+                                both linked Pokemon are considered dead. It&apos;s the ultimate test of teamwork and strategy.
+                            </CardDescription>
+                        </CardContent>
+                    </Card>
+
+                    <Card>
+                        <CardHeader>
+                            <CardTitle className="text-xl md:text-2xl text-primary">Track Everything</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <CardDescription className="text-base leading-relaxed">
+                                Monitor your soul link pairs, track deaths, see who&apos;s responsible for losses, and get detailed
+                                analytics on your Pokemon journey together.
+                            </CardDescription>
+                        </CardContent>
+                    </Card>
+                </div>
+
+                <div className="text-center">
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+                        <Button asChild size="lg" className="text-lg px-8 flex-1">
+                            <Link href="/auth/sign-up">Start Your Journey</Link>
+                        </Button>
+                        <Button asChild variant="outline" size="lg" className="text-lg px-8 flex-1 bg-transparent">
+                            <Link href="/auth/login">Login</Link>
+                        </Button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
