@@ -126,8 +126,12 @@ export default function PokemonManagePage() {
                 pokemon1_nickname: pokemon1Nickname.trim() || null,
                 pokemon2_nickname: pokemon2Nickname.trim() || null,
             })
-        } catch (error: any) {
-            setError(error.message || "Failed to update nicknames")
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                setError(error.message)
+            } else {
+                setError("Failed to update nicknames")
+            }
         } finally {
             setIsLoading(false)
         }
@@ -155,8 +159,12 @@ export default function PokemonManagePage() {
             if (error) throw error
 
             router.push(`/games/${gameId}`)
-        } catch (error: any) {
-            setError(error.message || "Failed to mark Pokemon as dead")
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                setError(error.message)
+            } else {
+                setError("Failed to mark pair as dead")
+            }
         } finally {
             setIsLoading(false)
         }

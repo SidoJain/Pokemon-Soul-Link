@@ -80,8 +80,12 @@ function CreateGameForm() {
             ])
 
             router.push(`/games/${data.id}`)
-        } catch (error: any) {
-            setError(error.message || "Failed to create game")
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                setError(error.message)
+            } else {
+                setError("Failed to create game")
+            }
         } finally {
             setIsLoading(false)
         }

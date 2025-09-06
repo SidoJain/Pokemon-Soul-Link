@@ -83,8 +83,12 @@ export default function AddPokemonPage() {
             if (error) throw error
 
             window.location.href = `/games/${gameId}`
-        } catch (error: any) {
-            setError(error.message || "Failed to add Pokemon pair")
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                setError(error.message)
+            } else {
+                setError("Failed to add pokemon pair")
+            }
         } finally {
             setIsLoading(false)
         }

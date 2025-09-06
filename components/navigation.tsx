@@ -48,6 +48,9 @@ export function Navigation({ username }: NavigationProps) {
                             <Link href="/analytics" className="text-foreground hover:text-primary transition-colors">
                                 Analytics
                             </Link>
+                            <Link href="/profile" className="text-foreground hover:text-primary transition-colors">
+                                Profile
+                            </Link>
                         </div>
                     </div>
                     <div className="flex items-center space-x-4">

@@ -101,7 +101,7 @@ export default async function GamePage({ params }: GamePageProps) {
 
                     <Card>
                         <CardHeader>
-                            <CardTitle className="text-lg">{opponent?.username}'s Deaths</CardTitle>
+                            <CardTitle className="text-lg">{opponent?.username}&apos;s Deaths</CardTitle>
                         </CardHeader>
                         <CardContent>
                             <div className="text-3xl font-bold text-destructive">{opponentStats?.death_count || 0}</div>

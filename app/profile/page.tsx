@@ -71,8 +71,12 @@ export default function ProfilePage() {
 
             setSuccess("Profile updated successfully!")
             setProfile({ ...profile, username: username.trim() })
-        } catch (error: any) {
-            setError(error.message || "Failed to update profile")
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                setError(error.message)
+            } else {
+                setError("Failed to update profile")
+            }
         } finally {
             setIsLoading(false)
         }

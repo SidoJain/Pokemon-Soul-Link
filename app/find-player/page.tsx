@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState, useEffect } from "react"
 import { createClient } from "@/lib/supabase/client"
 import { Navigation } from "@/components/navigation"
@@ -10,6 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { useRouter } from "next/navigation"
+import type { User } from '@supabase/supabase-js'
 
 interface Profile {
     id: string
@@ -22,7 +22,7 @@ export default function FindPlayerPage() {
     const [searchResults, setSearchResults] = useState<Profile[]>([])
     const [isLoading, setIsLoading] = useState(false)
     const [hasSearched, setHasSearched] = useState(false)
-    const [currentUser, setCurrentUser] = useState<any>(null)
+    const [currentUser, setCurrentUser] = useState<User | null>(null)
     const [currentProfile, setCurrentProfile] = useState<Profile | null>(null)
     const [gameName, setGameName] = useState("")
     const [requestSent, setRequestSent] = useState<string | null>(null)
@@ -83,7 +83,7 @@ export default function FindPlayerPage() {
 
         try {
             const { error } = await supabase.from("game_requests").insert({
-                sender_id: currentUser.id,
+                sender_id: currentUser?.id,
                 receiver_id: receiverId,
                 game_name: gameName.trim(),
                 status: "pending",
@@ -93,8 +93,12 @@ export default function FindPlayerPage() {
 
             setRequestSent(receiverUsername)
             setGameName("")
-        } catch (error: any) {
-            setError(error.message || "Failed to send game request")
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                setError(error.message)
+            } else {
+                setError("Failed to send game request")
+            }
         } finally {
             setIsLoading(false)
         }
@@ -206,7 +210,7 @@ export default function FindPlayerPage() {
                     {hasSearched && searchTerm && searchResults.length === 0 && !isLoading && (
                         <Card>
                             <CardContent className="text-center py-8">
-                                <p className="text-muted-foreground">No trainers found with username "{searchTerm}"</p>
+                                <p className="text-muted-foreground">No trainers found with username &ldquo;{searchTerm}&ldquo;</p>
                             </CardContent>
                         </Card>
                     )}
