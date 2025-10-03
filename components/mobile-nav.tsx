@@ -60,6 +60,14 @@ export function MobileNav({ username, onSignOut, isLoading }: MobileNavProps) {
                     >
                         Analytics
                     </Link>
+                    <Link
+                        target="_blank"
+                        href="https://pakdomon.onrender.com/"
+                        className="text-foreground hover:text-primary transition-colors py-2"
+                        onClick={() => setOpen(false)}
+                    >
+                        Pokedex
+                    </Link>
                     <div className="border-t pt-4">
                         {username && (
                             <p className="text-sm text-muted-foreground mb-4">

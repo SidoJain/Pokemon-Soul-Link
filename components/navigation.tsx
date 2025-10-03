@@ -48,6 +48,9 @@ export function Navigation({ username }: NavigationProps) {
                             <Link href="/analytics" className="text-foreground hover:text-primary transition-colors">
                                 Analytics
                             </Link>
+                            <Link target="_blank" href="https://pakdomon.onrender.com/" className="text-foreground hover:text-primary transition-colors">
+                                Pokedex
+                            </Link>
                         </div>
                     </div>
                     <div className="flex items-center space-x-4">
