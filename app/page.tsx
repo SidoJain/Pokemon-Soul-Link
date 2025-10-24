@@ -1,9 +1,35 @@
+"use client"
+
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
+import { useState, useEffect } from "react"
 
 export default function HomePage() {
+    const [activeUsers, setActiveUsers] = useState(0)
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        async function fetchUserCount() {
+            try {
+                const response = await fetch('/api/users/count')
+                if (!response.ok) {
+                    throw new Error('Failed to fetch user count')
+                }
+                const data = await response.json()
+                setActiveUsers(data.count)
+            } catch (error) {
+                console.error('Error fetching user count:', error)
+                setActiveUsers(0)
+            } finally {
+                setLoading(false)
+            }
+        }
+
+        fetchUserCount()
+    }, [])
+
     return (
         <div className="min-h-screen bg-background">
             <div className="absolute top-4 right-4 z-10">
@@ -16,6 +42,13 @@ export default function HomePage() {
                     <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                         Track your Pokemon Soul Link adventures with friends. Monitor deaths, analyze statistics, and see who&apos;s
                         the better trainer.
+                    </p>
+                    <p>
+                        {loading ? (
+                            "Active players: Loading..."
+                        ) : (
+                            `Active players: ${activeUsers}`
+                        )}
                     </p>
                 </div>
 
