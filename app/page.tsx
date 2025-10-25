@@ -1,11 +1,46 @@
+"use client"
+
 import { ThemeToggle } from "@/components/theme-toggle"
 import { getPlayerCount } from "./actions/get-player-count"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
+import { createClient } from "@/lib/supabase/client"
 import Link from "next/link"
 
-export default async function HomePage() {
-    const playerCount = await getPlayerCount()
+export default function HomePage() {
+    const [playerCount, setPlayerCount] = useState<number | null>(null)
+    const [isLoading, setIsLoading] = useState(true)
+    const router = useRouter()
+
+    useEffect(() => {
+        const checkAuthAndFetchCount = async () => {
+            const supabase = createClient()
+            const { data: { session } } = await supabase.auth.getSession()
+            if (session) {
+                router.push("/dashboard")
+                return
+            }
+
+            const count = await getPlayerCount()
+            setPlayerCount(count)
+            setIsLoading(false)
+        }
+
+        checkAuthAndFetchCount()
+    }, [router])
+
+    if (isLoading || playerCount === null) {
+        return (
+            <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
+                <div className="text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+                    <p className="text-gray-600 dark:text-gray-400">Loading...</p>
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div className="min-h-screen bg-background">

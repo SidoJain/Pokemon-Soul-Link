@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label"
 import { ThemeToggle } from "@/components/theme-toggle"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function SignUpPage() {
     const [email, setEmail] = useState("")
@@ -18,7 +18,22 @@ export default function SignUpPage() {
     const [repeatPassword, setRepeatPassword] = useState("")
     const [error, setError] = useState<string | null>(null)
     const [isLoading, setIsLoading] = useState(false)
+    const [isCheckingAuth, setIsCheckingAuth] = useState(true)
     const router = useRouter()
+
+    useEffect(() => {
+        const checkAuth = async () => {
+            const supabase = createClient()
+            const { data: { session } } = await supabase.auth.getSession()
+
+            if (session) {
+                router.push("/dashboard")
+            }
+            setIsCheckingAuth(false)
+        }
+
+        checkAuth()
+    }, [router])
 
     const handleSignUp = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -69,6 +84,17 @@ export default function SignUpPage() {
         } finally {
             setIsLoading(false)
         }
+    }
+
+    if (isCheckingAuth) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+                <div className="text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+                    <p className="text-gray-600 dark:text-gray-400">Loading...</p>
+                </div>
+            </div>
+        )
     }
 
     return (
