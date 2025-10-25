@@ -21,7 +21,7 @@ export function DeathChart({ data }: DeathChartProps) {
     ] : [
         { name: "Your Deaths", value: totalUserDeaths, color: "#dc2626" },
         { name: "Opponent Deaths", value: totalOpponentDeaths, color: "#2563eb" }
-    ];
+    ]
 
     return (
         <Card>

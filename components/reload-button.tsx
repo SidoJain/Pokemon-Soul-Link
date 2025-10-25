@@ -1,12 +1,12 @@
-"use client";
+"use client"
 
-import { Button } from "@/components/ui/button";
-import { RefreshCw } from "lucide-react";
+import { Button } from "@/components/ui/button"
+import { RefreshCw } from "lucide-react"
 
 export function ReloadButton() {
     const handleReload = () => {
-        window.location.reload();
-    };
+        window.location.reload()
+    }
 
     return (
         <Button
@@ -18,5 +18,5 @@ export function ReloadButton() {
         >
             <RefreshCw className="w-5 h-5" />
         </Button>
-    );
+    )
 }

@@ -1,34 +1,11 @@
-"use client"
-
 import { ThemeToggle } from "@/components/theme-toggle"
+import { getPlayerCount } from "./actions/get-player-count"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
-import { useState, useEffect } from "react"
 
-export default function HomePage() {
-    const [activeUsers, setActiveUsers] = useState(0)
-    const [loading, setLoading] = useState(true)
-
-    useEffect(() => {
-        async function fetchUserCount() {
-            try {
-                const response = await fetch('/api/users/count')
-                if (!response.ok) {
-                    throw new Error('Failed to fetch user count')
-                }
-                const data = await response.json()
-                setActiveUsers(data.count)
-            } catch (error) {
-                console.error('Error fetching user count:', error)
-                setActiveUsers(0)
-            } finally {
-                setLoading(false)
-            }
-        }
-
-        fetchUserCount()
-    }, [])
+export default async function HomePage() {
+    const playerCount = await getPlayerCount()
 
     return (
         <div className="min-h-screen bg-background">
@@ -44,11 +21,7 @@ export default function HomePage() {
                         the better trainer.
                     </p>
                     <p>
-                        {loading ? (
-                            "Active players: Loading..."
-                        ) : (
-                            `Active players: ${activeUsers}`
-                        )}
+                        Join {playerCount.toLocaleString()} trainers already playing.
                     </p>
                 </div>
 
