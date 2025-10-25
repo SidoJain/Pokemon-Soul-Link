@@ -107,7 +107,14 @@ export default function LoginPage() {
                                     </div>
                                     {error && <p className="text-sm text-destructive">{error}</p>}
                                     <Button type="submit" className="w-full" disabled={isLoading}>
-                                        {isLoading ? "Logging in..." : "Login"}
+                                        {isLoading ? (
+                                            <div className="flex items-center justify-center gap-2">
+                                                <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
+                                                <span>Loggin in...</span>
+                                            </div>
+                                        ) : (
+                                            "Login"
+                                        )}
                                     </Button>
                                 </div>
                                 <div className="mt-4 text-center text-sm">
