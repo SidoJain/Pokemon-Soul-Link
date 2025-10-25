@@ -54,13 +54,10 @@ export default function SignUpPage() {
         }
 
         try {
-            const { data: existingUsers, error: fetchError } = await supabase
-                .from("profiles")
-                .select("email")
-                .eq("email", email)
-                .limit(1)
-            if (fetchError) throw fetchError
-            if (existingUsers && existingUsers.length > 0) {
+            const { data: emailExists, error: rpcError } = await supabase
+                .rpc('check_email_exists', { user_email: email })
+            if (rpcError) throw rpcError
+            if (emailExists) {
                 setError("Email already registered. Please log in.")
                 setIsLoading(false)
                 return
