@@ -197,7 +197,6 @@ export default function FindPlayerPage() {
                                                 size="sm"
                                                 disabled={!gameName.trim() || isLoading}
                                             >
-                                                Start Game
                                                 {isLoading ? "Sending..." : "Send Request"}
                                             </Button>
                                         </div>
