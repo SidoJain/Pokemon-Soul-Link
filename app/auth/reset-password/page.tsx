@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export default function ResetPasswordPage() {
     const [password, setPassword] = useState("")
@@ -76,15 +77,14 @@ export default function ResetPasswordPage() {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 p-4">
+            <div className="absolute top-4 right-4">
+                <ThemeToggle />
+            </div>
+
             <div className="w-full max-w-md">
                 <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm dark:bg-gray-900/80">
                     <CardHeader className="text-center pb-2">
-                        <div className="mx-auto w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center mb-4">
-                            <span className="text-white font-bold text-xl">🔐</span>
-                        </div>
-                        <CardTitle className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                            Create New Password
-                        </CardTitle>
+                        <CardTitle className="text-2xl font-bold">Reset Password</CardTitle>
                         <CardDescription className="text-gray-600 dark:text-gray-400">
                             Enter your new password below
                         </CardDescription>
@@ -102,7 +102,7 @@ export default function ResetPasswordPage() {
                                     {error}
                                 </div>
                                 <Link href="/auth/forgot-password">
-                                    <Button className="w-full h-11 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium">
+                                    <Button className="w-full h-11 bg-blue-600 hover:bg-blue-700 text-white font-medium">
                                         Request New Link
                                     </Button>
                                 </Link>
@@ -144,7 +144,7 @@ export default function ResetPasswordPage() {
                                 )}
                                 <Button
                                     type="submit"
-                                    className="w-full h-11 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium"
+                                    className="w-full h-11 bg-blue-600 hover:bg-blue-700 text-white font-medium"
                                     disabled={isLoading}
                                 >
                                     {isLoading ? (
@@ -157,6 +157,13 @@ export default function ResetPasswordPage() {
                                     )}
                                 </Button>
                             </form>
+                        )}
+                        {!error && !success && (
+                            <div className="text-center text-sm text-gray-600 dark:text-gray-400">
+                                <Link href="/auth/login" className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400">
+                                    Back to login
+                                </Link>
+                            </div>
                         )}
                     </CardContent>
                 </Card>
