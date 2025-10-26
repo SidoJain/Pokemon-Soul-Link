@@ -6,10 +6,10 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { ThemeToggle } from "@/components/theme-toggle"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
-import { ThemeToggle } from "@/components/theme-toggle"
 
 export default function ResetPasswordPage() {
     const [password, setPassword] = useState("")
@@ -66,107 +66,97 @@ export default function ResetPasswordPage() {
 
     if (isCheckingToken) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+            <div className="flex min-h-screen w-full items-center justify-center p-6 md:p-10 bg-background">
                 <div className="text-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-                    <p className="text-gray-600 dark:text-gray-400">Verifying reset link...</p>
+                    <div className="animate-spin rounded-full h-12 w-12 border-2 border-primary border-t-transparent mx-auto mb-4"></div>
+                    <p className="text-muted-foreground">Verifying reset link...</p>
                 </div>
             </div>
         )
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 p-4">
-            <div className="absolute top-4 right-4">
+        <div className="flex min-h-screen w-full items-center justify-center p-6 md:p-10 bg-background">
+            <div className="absolute top-4 right-4 z-10">
                 <ThemeToggle />
             </div>
 
-            <div className="w-full max-w-md">
-                <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm dark:bg-gray-900/80">
-                    <CardHeader className="text-center pb-2">
-                        <CardTitle className="text-2xl font-bold">Reset Password</CardTitle>
-                        <CardDescription className="text-gray-600 dark:text-gray-400">
-                            Enter your new password below
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                        {success ? (
-                            <div className="space-y-4">
-                                <div className="p-4 text-sm text-green-600 bg-green-50 border border-green-200 rounded-lg dark:bg-green-900/20 dark:text-green-400 dark:border-green-800">
-                                    Password reset successfully! Redirecting to login...
+            <div className="w-full max-w-sm">
+                <div className="flex flex-col gap-6">
+                    <div className="text-center mb-6">
+                        <h1 className="text-3xl font-bold text-primary">Pokemon Soul Link</h1>
+                        <p className="text-muted-foreground mt-2">Track your soul link adventures</p>
+                    </div>
+                    <Card>
+                        <CardHeader>
+                            <CardTitle className="text-2xl">Reset Password</CardTitle>
+                            <CardDescription>Enter your new password below</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            {success ? (
+                                <div className="space-y-4">
+                                    <p className="text-sm text-green-600 dark:text-green-400">
+                                        Password reset successfully! Redirecting to login...
+                                    </p>
                                 </div>
-                            </div>
-                        ) : error ? (
-                            <div className="space-y-4">
-                                <div className="p-4 text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg dark:bg-red-900/20 dark:text-red-400 dark:border-red-800">
-                                    {error}
+                            ) : error ? (
+                                <div className="space-y-4">
+                                    <p className="text-sm text-destructive">{error}</p>
+                                    <Link href="/auth/forgot-password">
+                                        <Button className="w-full">Request New Link</Button>
+                                    </Link>
                                 </div>
-                                <Link href="/auth/forgot-password">
-                                    <Button className="w-full h-11 bg-blue-600 hover:bg-blue-700 text-white font-medium">
-                                        Request New Link
-                                    </Button>
-                                </Link>
-                            </div>
-                        ) : (
-                            <form onSubmit={handleSubmit} className="space-y-4">
-                                <div className="space-y-2">
-                                    <Label htmlFor="password" className="text-sm font-medium">
-                                        New Password
-                                    </Label>
-                                    <Input
-                                        id="password"
-                                        type="password"
-                                        placeholder="Enter new password"
-                                        required
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                        className="h-11"
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <Label htmlFor="confirmPassword" className="text-sm font-medium">
-                                        Confirm Password
-                                    </Label>
-                                    <Input
-                                        id="confirmPassword"
-                                        type="password"
-                                        placeholder="Confirm new password"
-                                        required
-                                        value={confirmPassword}
-                                        onChange={(e) => setConfirmPassword(e.target.value)}
-                                        className="h-11"
-                                    />
-                                </div>
-                                {error && (
-                                    <div className="p-3 text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg dark:bg-red-900/20 dark:text-red-400 dark:border-red-800">
-                                        {error}
-                                    </div>
-                                )}
-                                <Button
-                                    type="submit"
-                                    className="w-full h-11 bg-blue-600 hover:bg-blue-700 text-white font-medium"
-                                    disabled={isLoading}
-                                >
-                                    {isLoading ? (
-                                        <div className="flex items-center justify-center gap-2">
-                                            <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
-                                            <span>Resetting...</span>
+                            ) : (
+                                <form onSubmit={handleSubmit}>
+                                    <div className="flex flex-col gap-6">
+                                        <div className="grid gap-2">
+                                            <Label htmlFor="password">New Password</Label>
+                                            <Input
+                                                id="password"
+                                                type="password"
+                                                placeholder="Enter new password"
+                                                required
+                                                value={password}
+                                                onChange={(e) => setPassword(e.target.value)}
+                                            />
                                         </div>
-                                    ) : (
-                                        "Reset Password"
-                                    )}
-                                </Button>
-                            </form>
-                        )}
-                        {!error && !success && (
-                            <div className="text-center text-sm text-gray-600 dark:text-gray-400">
-                                <Link href="/auth/login" className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400">
-                                    Back to login
-                                </Link>
-                            </div>
-                        )}
-                    </CardContent>
-                </Card>
+                                        <div className="grid gap-2">
+                                            <Label htmlFor="confirmPassword">Confirm Password</Label>
+                                            <Input
+                                                id="confirmPassword"
+                                                type="password"
+                                                placeholder="Confirm new password"
+                                                required
+                                                value={confirmPassword}
+                                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                            />
+                                        </div>
+                                        {error && <p className="text-sm text-destructive">{error}</p>}
+                                        <Button type="submit" className="w-full" disabled={isLoading}>
+                                            {isLoading ? (
+                                                <div className="flex items-center justify-center gap-2">
+                                                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
+                                                    <span>Resetting...</span>
+                                                </div>
+                                            ) : (
+                                                "Reset Password"
+                                            )}
+                                        </Button>
+                                    </div>
+                                    <div className="mt-4 text-center text-sm">
+                                        Remember your password?{" "}
+                                        <Link
+                                            href="/auth/login"
+                                            className="underline underline-offset-4 text-primary hover:text-primary/80"
+                                        >
+                                            Log In
+                                        </Link>
+                                    </div>
+                                </form>
+                            )}
+                        </CardContent>
+                    </Card>
+                </div>
             </div>
         </div>
     )
