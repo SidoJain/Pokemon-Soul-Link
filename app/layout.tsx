@@ -17,14 +17,14 @@ export const metadata: Metadata = {
     alternates: {
         canonical: "https://pokemon-soul-link.vercel.app/",
     },
+    authors: [{ name: "Siddharth Jain", url: "https://www.sidojain.dev" }],
+    creator: "Siddharth Jain",
+    publisher: "Siddharth Jain",
+    keywords: ["Siddharth Jain", "Sido Jain", "sidojain", "pokemon", "soul link", "nuzlock", "Full Stack", "Open Source"],
     robots: "index,follow"
 }
 
-export default function RootLayout({
-    children,
-}: Readonly<{
-    children: React.ReactNode
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
         <html lang="en" suppressHydrationWarning>
             <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
