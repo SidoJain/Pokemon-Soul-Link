@@ -47,11 +47,19 @@ export default function AddPokemonPage() {
             }
 
             // Get current user's profile
-            const { data: profile } = await supabase.from("profiles").select("*").eq("id", user.id).single()
+            const { data: profile } = await supabase
+                .from("profiles")
+                .select("*")
+                .eq("id", user.id)
+                .single()
             setCurrentProfile(profile)
 
             // Get game details
-            const { data: gameData } = await supabase.from("soul_link_games").select("*").eq("id", gameId).single()
+            const { data: gameData } = await supabase
+                .from("soul_link_games")
+                .select("*")
+                .eq("id", gameId)
+                .single()
             if (!gameData || (gameData.player1_id !== user.id && gameData.player2_id !== user.id)) {
                 router.push("/games")
                 return

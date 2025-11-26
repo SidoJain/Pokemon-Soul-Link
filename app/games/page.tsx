@@ -14,7 +14,11 @@ export default async function GamesPage() {
     }
 
     // Get user profile
-    const { data: profile } = await supabase.from("profiles").select("*").eq("id", user.id).single()
+    const { data: profile } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", user.id)
+        .single()
     const { data: games } = await supabase
         .from("soul_link_games")
         .select(`

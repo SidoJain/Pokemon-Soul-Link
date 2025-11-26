@@ -39,7 +39,11 @@ export default function FindPlayerPage() {
             }
 
             setCurrentUser(user)
-            const { data: profile } = await supabase.from("profiles").select("*").eq("id", user.id).single()
+            const { data: profile } = await supabase
+                .from("profiles")
+                .select("*")
+                .eq("id", user.id)
+                .single()
             setCurrentProfile(profile)
         }
 
@@ -82,13 +86,14 @@ export default function FindPlayerPage() {
         const supabase = createClient()
 
         try {
-            const { error } = await supabase.from("game_requests").insert({
-                sender_id: currentUser?.id,
-                receiver_id: receiverId,
-                game_name: gameName.trim(),
-                status: "pending",
-            })
-
+            const { error } = await supabase
+                .from("game_requests")
+                .insert({
+                    sender_id: currentUser?.id,
+                    receiver_id: receiverId,
+                    game_name: gameName.trim(),
+                    status: "pending",
+                })
             if (error) throw error
 
             setRequestSent(receiverUsername)

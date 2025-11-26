@@ -29,16 +29,18 @@ export default function ProfilePage() {
     useEffect(() => {
         const getProfile = async () => {
             const supabase = createClient()
-            const {
-                data: { user },
-            } = await supabase.auth.getUser()
+            const { data: { user } } = await supabase.auth.getUser()
 
             if (!user) {
                 router.push("/auth/login")
                 return
             }
 
-            const { data: profileData } = await supabase.from("profiles").select("*").eq("id", user.id).single()
+            const { data: profileData } = await supabase
+                .from("profiles")
+                .select("*")
+                .eq("id", user.id)
+                .single()
             if (profileData) {
                 setProfile(profileData)
                 setUsername(profileData.username)

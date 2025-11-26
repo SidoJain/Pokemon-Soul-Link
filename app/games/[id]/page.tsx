@@ -19,7 +19,11 @@ export default async function GamePage({ params }: GamePageProps) {
     }
 
     // Get user profile
-    const { data: profile } = await supabase.from("profiles").select("*").eq("id", user.id).single()
+    const { data: profile } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", user.id)
+        .single()
     const { data: game } = await supabase
         .from("soul_link_games")
         .select(`

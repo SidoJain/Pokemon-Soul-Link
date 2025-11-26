@@ -38,16 +38,18 @@ export default function RequestsPage() {
     useEffect(() => {
         const getCurrentUser = async () => {
             const supabase = createClient()
-            const {
-                data: { user },
-            } = await supabase.auth.getUser()
+            const { data: { user } } = await supabase.auth.getUser()
 
             if (!user) {
                 router.push("/auth/login")
                 return
             }
 
-            const { data: profile } = await supabase.from("profiles").select("*").eq("id", user.id).single()
+            const { data: profile } = await supabase
+                .from("profiles")
+                .select("*")
+                .eq("id", user.id)
+                .single()
             setCurrentProfile(profile)
             await loadRequests(user.id)
         }
@@ -62,23 +64,49 @@ export default function RequestsPage() {
             // Load received requests
             const { data: received } = await supabase
                 .from("game_requests")
-                .select(`
-                    *
-                `)
+                .select(`*`)
                 .eq("receiver_id", userId)
                 .order("created_at", { ascending: false })
 
-            // Load sent requests
+            const senderIds = Array.from(new Set((received || []).map(r => r.sender_id)))
+            let senderProfiles: { id: string; username: string }[] = []
+            if (senderIds.length > 0) {
+                const { data: profilesData } = await supabase
+                    .from("profiles")
+                    .select("id, username")
+                    .in("id", senderIds)
+                senderProfiles = profilesData || []
+            }
+
+            const receivedWithProfiles = (received || []).map(r => ({
+                ...r,
+                sender_profile: senderProfiles.find(p => p.id === r.sender_id) || undefined,
+            }))
+
+            // Load sent requests and attach receiver profiles
             const { data: sent } = await supabase
                 .from("game_requests")
-                .select(`
-                    *
-                `)
+                .select(`*`)
                 .eq("sender_id", userId)
                 .order("created_at", { ascending: false })
 
-            setReceivedRequests(received || [])
-            setSentRequests(sent || [])
+            const receiverIds = Array.from(new Set((sent || []).map(r => r.receiver_id)))
+            let receiverProfiles: { id: string; username: string }[] = []
+            if (receiverIds.length > 0) {
+                const { data: profilesData } = await supabase
+                    .from("profiles")
+                    .select("id, username")
+                    .in("id", receiverIds)
+                receiverProfiles = profilesData || []
+            }
+
+            const sentWithProfiles = (sent || []).map(r => ({
+                ...r,
+                receiver_profile: receiverProfiles.find(p => p.id === r.receiver_id) || undefined,
+            }))
+
+            setReceivedRequests(receivedWithProfiles)
+            setSentRequests(sentWithProfiles)
         } catch (error) {
             console.error("Error loading requests:", error)
         } finally {
@@ -174,7 +202,11 @@ export default function RequestsPage() {
                                                 <div>
                                                     <CardTitle className="text-lg">{request.game_name}</CardTitle>
                                                     <CardDescription>
-                                                        {new Date(request.created_at).toLocaleDateString()}
+                                                        <div className="text-sm text-muted-foreground">
+                                                            From: {request.sender_profile?.username ?? request.sender_id}
+                                                            <br />
+                                                            {new Date(request.created_at).toLocaleDateString()}
+                                                        </div>
                                                     </CardDescription>
                                                 </div>
                                                 <Badge
@@ -226,7 +258,11 @@ export default function RequestsPage() {
                                                 <div>
                                                     <CardTitle className="text-lg">{request.game_name}</CardTitle>
                                                     <CardDescription>
-                                                        {new Date(request.created_at).toLocaleDateString()}
+                                                        <div className="text-sm text-muted-foreground">
+                                                            To: {request.receiver_profile?.username ?? request.receiver_id}
+                                                            <br />
+                                                            {new Date(request.created_at).toLocaleDateString()}
+                                                        </div>
                                                     </CardDescription>
                                                 </div>
                                                 <Badge

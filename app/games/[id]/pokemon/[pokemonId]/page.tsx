@@ -62,7 +62,11 @@ export default function PokemonManagePage() {
             }
 
             // Get current user's profile
-            const { data: profile } = await supabase.from("profiles").select("*").eq("id", user.id).single()
+            const { data: profile } = await supabase
+                .from("profiles")
+                .select("*")
+                .eq("id", user.id)
+                .single()
             setCurrentProfile(profile)
 
             // Get game details with player info

@@ -31,16 +31,18 @@ function CreateGameForm() {
     useEffect(() => {
         const getCurrentUser = async () => {
             const supabase = createClient()
-            const {
-                data: { user },
-            } = await supabase.auth.getUser()
+            const { data: { user } } = await supabase.auth.getUser()
 
             if (!user) {
                 router.push("/auth/login")
                 return
             }
 
-            const { data: profile } = await supabase.from("profiles").select("*").eq("id", user.id).single()
+            const { data: profile } = await supabase
+                .from("profiles")
+                .select("*")
+                .eq("id", user.id)
+                .single()
             setCurrentProfile(profile)
         }
         getCurrentUser()
