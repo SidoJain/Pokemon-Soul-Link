@@ -21,7 +21,12 @@ The Pokémon Soul Link Nuzlocke is a cooperative challenge: two trainers link th
 
 ## Rules (for reference)
 
-- Only the first Pokémon caught per area by each player are linked.  
+- Usually played with a Pokémon Randomizer.
+- Only the first Pokémon encountered in each area can be caught.
+- The Pokémon in each area by each player are linked.  
+- No two linked pairs may share the same primary type across the team.
+- If a new encounter would give either player a Pokémon whose primary type is already present in that player’s party, that encounter must be boxed.
+- Species Clause: You cannot catch a Pokémon if either player has that exact species already in the Soul Link. That encounter must be rerolled.
 - If a Pokémon in a Soul Link pair faints, both are recorded as dead.  
 - Linked pairs must be stored or released together.  
 - If one player fails to catch, both Pokémon for that route are forfeited.  
