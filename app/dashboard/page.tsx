@@ -20,6 +20,10 @@ export default async function DashboardPage() {
         .select("*")
         .eq("id", user.id)
         .single()
+    const { count: totalGames } = await supabase
+        .from("soul_link_games")
+        .select("*", { count: "exact", head: true })
+        .or(`player1_id.eq.${user.id},player2_id.eq.${user.id}`)
     const { data: games } = await supabase
         .from("soul_link_games")
         .select(`
@@ -30,15 +34,15 @@ export default async function DashboardPage() {
         .or(`player1_id.eq.${user.id},player2_id.eq.${user.id}`)
         .order("created_at", { ascending: false })
         .limit(2)
-
     const { data: pendingRequests } = await supabase
         .from("game_requests")
         .select("id")
         .eq("receiver_id", user.id)
         .eq("status", "pending")
-
-    // Get death statistics
-    const { data: deathStats } = await supabase.from("death_statistics").select("*").eq("player_id", user.id)
+    const { data: deathStats } = await supabase
+        .from("death_statistics")
+        .select("*")
+        .eq("player_id", user.id)
     const totalDeaths = deathStats?.reduce((sum, stat) => sum + stat.death_count, 0) || 0
     const pendingRequestsCount = pendingRequests?.length || 0
 
@@ -60,7 +64,7 @@ export default async function DashboardPage() {
                             <CardTitle className="text-base md:text-lg">Total Games</CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl md:text-3xl font-bold text-primary">{games?.length || 0}</div>
+                            <div className="text-2xl md:text-3xl font-bold text-primary">{totalGames}</div>
                         </CardContent>
                     </Card>
 
