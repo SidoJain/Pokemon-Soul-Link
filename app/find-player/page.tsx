@@ -3,6 +3,7 @@
 import type React from "react"
 import { useState, useEffect } from "react"
 import { createClient } from "@/lib/supabase/client"
+import { getPlayerCount } from "@/app/actions/get-player-count"
 import { Navigation } from "@/components/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -19,6 +20,7 @@ interface Profile {
 
 export default function FindPlayerPage() {
     const [searchTerm, setSearchTerm] = useState("")
+    const [playerCount, setPlayerCount] = useState<number | null>(0)
     const [searchResults, setSearchResults] = useState<Profile[]>([])
     const [isLoading, setIsLoading] = useState(false)
     const [hasSearched, setHasSearched] = useState(false)
@@ -30,7 +32,7 @@ export default function FindPlayerPage() {
     const router = useRouter()
 
     useEffect(() => {
-        const getCurrentUser = async () => {
+        const checkAuthAndFetchCount = async () => {
             const supabase = createClient()
             const { data: { user } } = await supabase.auth.getUser()
             if (!user) {
@@ -44,10 +46,13 @@ export default function FindPlayerPage() {
                 .select("*")
                 .eq("id", user.id)
                 .single()
+
+            const count = await getPlayerCount()
+            setPlayerCount(count)
             setCurrentProfile(profile)
         }
 
-        getCurrentUser()
+        checkAuthAndFetchCount()
     }, [router])
 
     const handleSearch = async (e: React.FormEvent) => {
@@ -123,7 +128,11 @@ export default function FindPlayerPage() {
                     <Card className="mb-8">
                         <CardHeader>
                             <CardTitle>Search Players</CardTitle>
-                            <CardDescription>Enter a username to find other trainers</CardDescription>
+                            <CardDescription>
+                                Enter a username to find other trainers
+                                <br />
+                                There are {playerCount} players to have an adventure with
+                            </CardDescription>
                         </CardHeader>
                         <CardContent>
                             <form onSubmit={handleSearch} className="space-y-4">

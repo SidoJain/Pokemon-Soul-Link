@@ -1,7 +1,7 @@
 "use client"
 
 import { ThemeToggle } from "@/components/theme-toggle"
-import { getPlayerCount } from "./actions/get-player-count"
+import { getPlayerCount } from "@/app/actions/get-player-count"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { useState, useEffect } from "react"
