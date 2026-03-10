@@ -28,6 +28,11 @@ interface Profile {
     username: string
 }
 
+function capitalizeFirst(str: string): string {
+    if (!str) return str;
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
 export default function RequestsPage() {
     const [receivedRequests, setReceivedRequests] = useState<GameRequest[]>([])
     const [sentRequests, setSentRequests] = useState<GameRequest[]>([])
@@ -191,7 +196,7 @@ export default function RequestsPage() {
                             {receivedRequests.length === 0 ? (
                                 <Card>
                                     <CardContent className="text-center py-8">
-                                        <p className="text-muted-foreground">No game requests received yet.</p>
+                                        <p className="text-muted-foreground">No game requests received yet...</p>
                                     </CardContent>
                                 </Card>
                             ) : (
@@ -218,7 +223,7 @@ export default function RequestsPage() {
                                                                 : "destructive"
                                                     }
                                                 >
-                                                    {request.status}
+                                                    {capitalizeFirst(request.status)}
                                                 </Badge>
                                             </div>
                                         </CardHeader>
@@ -247,7 +252,7 @@ export default function RequestsPage() {
                             {sentRequests.length === 0 ? (
                                 <Card>
                                     <CardContent className="text-center py-8">
-                                        <p className="text-muted-foreground">No game requests sent yet.</p>
+                                        <p className="text-muted-foreground">No game requests sent yet...</p>
                                     </CardContent>
                                 </Card>
                             ) : (
@@ -274,7 +279,7 @@ export default function RequestsPage() {
                                                                 : "destructive"
                                                     }
                                                 >
-                                                    {request.status}
+                                                    {capitalizeFirst(request.status)}
                                                 </Badge>
                                             </div>
                                         </CardHeader>

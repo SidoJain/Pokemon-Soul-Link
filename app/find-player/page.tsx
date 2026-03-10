@@ -48,7 +48,7 @@ export default function FindPlayerPage() {
                 .single()
 
             const count = await getPlayerCount()
-            setPlayerCount(count)
+            setPlayerCount(count - 1)
             setCurrentProfile(profile)
         }
 
@@ -129,9 +129,9 @@ export default function FindPlayerPage() {
                         <CardHeader>
                             <CardTitle>Search Players</CardTitle>
                             <CardDescription>
-                                Enter a username to find other trainers
+                                Enter a username to find other trainers.
                                 <br />
-                                There are {playerCount} players to have an adventure with
+                                There are {playerCount} players to have an adventure with...
                             </CardDescription>
                         </CardHeader>
                         <CardContent>

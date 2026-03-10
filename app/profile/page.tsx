@@ -106,7 +106,7 @@ export default function ProfilePage() {
                     <Card className="mb-8">
                         <CardHeader>
                             <CardTitle>Profile Information</CardTitle>
-                            <CardDescription>Update your trainer details</CardDescription>
+                            <CardDescription>Update your trainer details. This is how other players will find you.</CardDescription>
                         </CardHeader>
                         <CardContent>
                             <form onSubmit={handleUpdateProfile} className="space-y-4">
@@ -121,9 +121,6 @@ export default function ProfilePage() {
                                         required
                                         minLength={3}
                                     />
-                                    <p className="text-sm text-muted-foreground mt-1">
-                                        Your username is how other trainers will find you
-                                    </p>
                                 </div>
 
                                 {error && <div className="text-sm text-destructive bg-destructive/10 p-3 rounded-md">{error}</div>}

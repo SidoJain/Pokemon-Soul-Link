@@ -152,7 +152,7 @@ export default async function GamePage({ params }: GamePageProps) {
                                 </div>
                             ) : (
                                 <div className="text-center py-8">
-                                    <p className="text-muted-foreground mb-4">No active Pokemon pairs</p>
+                                    <p className="text-muted-foreground mb-4">No active Pokemon pairs...</p>
                                     <Button asChild size="sm">
                                         <Link href={`/games/${params.id}/add-pokemon`}>Add New Pair</Link>
                                     </Button>
@@ -190,7 +190,7 @@ export default async function GamePage({ params }: GamePageProps) {
                                 </div>
                             ) : (
                                 <div className="text-center py-8">
-                                    <p className="text-muted-foreground">No Pokemon lost yet</p>
+                                    <p className="text-muted-foreground">No Pokemon lost yet...</p>
                                 </div>
                             )}
                         </CardContent>

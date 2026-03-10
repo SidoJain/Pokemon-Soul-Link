@@ -125,7 +125,7 @@ export default function AddPokemonPage() {
                         <CardHeader>
                             <CardTitle>Pokemon Soul Link Pair</CardTitle>
                             <CardDescription>
-                                Enter the details for both Pokemon that will be linked together. If one dies, both die.
+                                Enter the details for both Pokemon that will be linked together. If one faints, both die.
                             </CardDescription>
                         </CardHeader>
                         <CardContent>
@@ -138,7 +138,7 @@ export default function AddPokemonPage() {
                                             <Input
                                                 id="pokemon1Name"
                                                 type="text"
-                                                placeholder="e.g., Pikachu"
+                                                placeholder="eg. Pikachu"
                                                 value={pokemon1Name}
                                                 onChange={(e) => setPokemon1Name(e.target.value)}
                                                 required
@@ -149,7 +149,7 @@ export default function AddPokemonPage() {
                                             <Input
                                                 id="pokemon1Nickname"
                                                 type="text"
-                                                placeholder="e.g., Sparky"
+                                                placeholder="eg. Sparky"
                                                 value={pokemon1Nickname}
                                                 onChange={(e) => setPokemon1Nickname(e.target.value)}
                                             />
@@ -163,7 +163,7 @@ export default function AddPokemonPage() {
                                             <Input
                                                 id="pokemon2Name"
                                                 type="text"
-                                                placeholder="e.g., Charmander"
+                                                placeholder="eg. Charmander"
                                                 value={pokemon2Name}
                                                 onChange={(e) => setPokemon2Name(e.target.value)}
                                                 required
@@ -174,7 +174,7 @@ export default function AddPokemonPage() {
                                             <Input
                                                 id="pokemon2Nickname"
                                                 type="text"
-                                                placeholder="e.g., Blaze"
+                                                placeholder="eg. Blaze"
                                                 value={pokemon2Nickname}
                                                 onChange={(e) => setPokemon2Nickname(e.target.value)}
                                             />

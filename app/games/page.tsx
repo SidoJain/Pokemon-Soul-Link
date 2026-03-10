@@ -40,7 +40,7 @@ export default async function GamesPage() {
                             <h1 className="text-3xl font-bold text-foreground mb-2">Your Games</h1>
                             <ReloadButton />
                         </div>
-                        <p className="text-muted-foreground">Manage your soul link adventures</p>
+                        <p className="text-muted-foreground">Manage your soul link adventures.</p>
                     </div>
                     <Button asChild>
                         <Link href="/games/create">Create New Game</Link>
